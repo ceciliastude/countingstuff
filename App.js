@@ -57,7 +57,7 @@ export default function App() {
               />
             ))}
           </ScrollView>
-          <AddRow addNewCountable={addNewCountable} />
+          <AddRow addNewCountable={addNewCountable} countables={countables} />
         </KeyboardAvoidingView>
         <StatusBar style="auto" />
       </SafeAreaView>

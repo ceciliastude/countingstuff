@@ -15,6 +15,8 @@ import { loadCountables, saveCountables } from "./storage/CountableStorage";
 export default function App() {
   const [countables, setCountables] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editedName, setEditedName] = useState("");
 
   useEffect(() => {
     loadCountables().then((result) => {
@@ -31,13 +33,34 @@ export default function App() {
 
   const changeCount = (amount, index) => {
     const newState = [...countables];
-    newState[index].count += amount;
+    newState[index].count = Math.max(0, newState[index].count + amount);
     setCountables(newState);
   };
 
   const addNewCountable = (name) => {
     const newState = [...countables, { name, count: 0 }];
     setCountables(newState);
+  };
+  const deleteCountable = (name) => {
+    const newState = countables.filter((countable) => countable.name !== name);
+    setCountables(newState);
+  };
+
+  const editCountable = (index) => {
+    setEditingIndex(index);
+    setEditedName(countables[index].name);
+  };
+
+  const saveEdit = () => {
+    if (editedName.trim() !== "") {
+      const newState = [...countables];
+      newState[editingIndex].name = editedName;
+      setCountables(newState);
+      setEditingIndex(null);
+      setEditedName("");
+    } else {
+      alert("Please enter a valid name.");
+    }
   };
 
   return (
@@ -54,6 +77,12 @@ export default function App() {
                 key={countable.name}
                 changeCount={changeCount}
                 index={index}
+                deleteCountable={deleteCountable}
+                editCountable={editCountable}
+                saveEdit={saveEdit}
+                isEditing={editingIndex === index}
+                editedName={editedName}
+                setEditedName={setEditedName}
               />
             ))}
           </ScrollView>

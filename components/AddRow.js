@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, TextInput, Alert } from "react-native";
+import { View, TextInput, Alert, Keyboard } from "react-native";
 
 import { CountableButton } from "./CountableButton";
 import { CommonStyles } from "../styles/CommonStyles";
@@ -23,7 +23,7 @@ export const AddRow = ({ addNewCountable, countables }) => {
       Alert.alert("Duplicate Entry", "A row with this name already exists.");
       return;
     }
-
+    Keyboard.dismiss();
     addNewCountable(trimmedName);
     setName("");
   };

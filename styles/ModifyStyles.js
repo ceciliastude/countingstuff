@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 
-export const CommonStyles = StyleSheet.create({
+export const ModifyStyles = StyleSheet.create({
   textItem: {
-    fontSize: 30,
+    fontSize: 15,
   },
   row: {
     flexDirection: "row",

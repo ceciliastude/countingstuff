@@ -5,12 +5,17 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
+  View,
+  Text,
+  Image,
 } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AddRow } from "./components/AddRow";
 import { CountableRow } from "./components/CountableRow";
 import { loadCountables, saveCountables } from "./storage/CountableStorage";
+import { EmptyPage } from "./styles/EmptyPage";
+import { Layout } from "./styles/Layout";
 
 export default function App() {
   const [countables, setCountables] = useState([]);
@@ -52,15 +57,28 @@ export default function App() {
   };
 
   const saveEdit = () => {
-    if (editedName.trim() !== "") {
-      const newState = [...countables];
-      newState[editingIndex].name = editedName;
-      setCountables(newState);
-      setEditingIndex(null);
-      setEditedName("");
-    } else {
+    const trimmedName = editedName.trim();
+
+    if (!trimmedName) {
       alert("Please enter a valid name.");
+      return;
     }
+    const isDuplicate = countables.some(
+      (item, index) =>
+        index !== editingIndex &&
+        item.name.toLowerCase() === trimmedName.toLowerCase()
+    );
+
+    if (isDuplicate) {
+      alert("A row with this name already exists.");
+      return;
+    }
+
+    const newState = [...countables];
+    newState[editingIndex].name = trimmedName;
+    setCountables(newState);
+    setEditingIndex(null);
+    setEditedName("");
   };
 
   return (
@@ -70,21 +88,37 @@ export default function App() {
           behavior={Platform.OS === "ios" ? "padding" : "undefined"}
           style={styles.container}
         >
-          <ScrollView>
-            {countables.map((countable, index) => (
-              <CountableRow
-                countable={countable}
-                key={countable.name}
-                changeCount={changeCount}
-                index={index}
-                deleteCountable={deleteCountable}
-                editCountable={editCountable}
-                saveEdit={saveEdit}
-                isEditing={editingIndex === index}
-                editedName={editedName}
-                setEditedName={setEditedName}
-              />
-            ))}
+          <View style={Layout.background}>
+            <Text style={Layout.headerText}>All Counters</Text>
+          </View>
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
+            {countables.length === 0 ? (
+              <View style={EmptyPage.container}>
+                <Image
+                  style={{ width: 25, height: 25 }}
+                  source={require("./assets/notes-icon.png")}
+                />
+                <Text style={EmptyPage.textItem}>No Items Added</Text>
+                <Text style={EmptyPage.subText}>
+                  Add your first item to start counting!
+                </Text>
+              </View>
+            ) : (
+              countables.map((countable, index) => (
+                <CountableRow
+                  countable={countable}
+                  key={countable.name}
+                  changeCount={changeCount}
+                  index={index}
+                  deleteCountable={deleteCountable}
+                  editCountable={editCountable}
+                  saveEdit={saveEdit}
+                  isEditing={editingIndex === index}
+                  editedName={editedName}
+                  setEditedName={setEditedName}
+                />
+              ))
+            )}
           </ScrollView>
           <AddRow addNewCountable={addNewCountable} countables={countables} />
         </KeyboardAvoidingView>

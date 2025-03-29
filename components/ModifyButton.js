@@ -1,10 +1,10 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-import { CommonStyles } from "../styles/CommonStyles";
+import { ModifyStyles } from "../styles/ModifyStyles";
 
 export const ModifyButton = ({ label, submit }) => (
   <TouchableOpacity style={styles.button} onPress={submit}>
-    <Text style={CommonStyles.textItem}>{label}</Text>
+    <Text style={ModifyStyles.textItem}>{label}</Text>
   </TouchableOpacity>
 );
 

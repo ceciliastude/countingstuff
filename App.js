@@ -104,20 +104,43 @@ export default function App() {
                 </Text>
               </View>
             ) : (
-              countables.map((countable, index) => (
-                <CountableRow
-                  countable={countable}
-                  key={countable.name}
-                  changeCount={changeCount}
-                  index={index}
-                  deleteCountable={deleteCountable}
-                  editCountable={editCountable}
-                  saveEdit={saveEdit}
-                  isEditing={editingIndex === index}
-                  editedName={editedName}
-                  setEditedName={setEditedName}
-                />
-              ))
+              countables.reduce((rows, _, index) => {
+                if (index % 2 === 0) {
+                  rows.push(
+                    <View key={index} style={styles.rowContainer}>
+                      <CountableRow
+                        countable={countables[index]}
+                        key={countables[index].name}
+                        changeCount={changeCount}
+                        index={index}
+                        deleteCountable={deleteCountable}
+                        editCountable={editCountable}
+                        saveEdit={saveEdit}
+                        isEditing={editingIndex === index}
+                        editedName={editedName}
+                        setEditedName={setEditedName}
+                        style={{ flex: 1 }}
+                      />
+                      {countables[index + 1] && (
+                        <CountableRow
+                          countable={countables[index + 1]}
+                          key={countables[index + 1].name}
+                          changeCount={changeCount}
+                          index={index + 1}
+                          deleteCountable={deleteCountable}
+                          editCountable={editCountable}
+                          saveEdit={saveEdit}
+                          isEditing={editingIndex === index + 1}
+                          editedName={editedName}
+                          setEditedName={setEditedName}
+                          style={{ flex: 1 }}
+                        />
+                      )}
+                    </View>
+                  );
+                }
+                return rows;
+              }, [])
             )}
           </ScrollView>
           <AddRow addNewCountable={addNewCountable} countables={countables} />
@@ -132,5 +155,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  rowContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 10,
   },
 });

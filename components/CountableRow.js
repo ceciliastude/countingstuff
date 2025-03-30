@@ -36,7 +36,14 @@ export const CountableRow = ({
           placeholder="Edit name"
         />
       ) : (
-        <Text style={styles.nameColumn}>{countable.name}</Text>
+        <Text
+          style={styles.nameColumn}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          onPress={() => Alert.alert(countable.name)}
+        >
+          {countable.name}
+        </Text>
       )}
     </View>
     <View style={styles.container}>
@@ -57,7 +64,7 @@ export const CountableRow = ({
           }}
         />
       </View>
-
+      {/* 
       <View style={styles.buttonColumn}>
         {isEditing ? (
           <ModifyButton
@@ -75,25 +82,25 @@ export const CountableRow = ({
             deleteConfirmation(countable.name, deleteCountable);
           }}
         />
+        
       </View>
+      */}
     </View>
   </View>
 );
 
 const styles = StyleSheet.create({
   entryColumn: {
-    alignItems: "left",
     padding: 10,
-    margin: 1,
     width: "50%",
-    height: "50%",
-    backgroundColor: "red", // Visual testing
+    margin: 1,
   },
   nameColumn: {
-    flex: 0.8,
-    fontSize: 40,
+    flex: 1,
+    fontSize: 20,
     alignItems: "center",
-    marginHorizontal: 20,
+    justifyContent: "flex-end",
+    textAlign: "center",
   },
   container: {
     alignItems: "center",

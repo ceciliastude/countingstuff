@@ -12,4 +12,8 @@ export const Layout = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
+  settingsButton: {
+    width: 10,
+    height: 10,
+  },
 });

@@ -6,7 +6,7 @@ import { AddPopUp } from "./AddPopUp";
 
 export const AddRow = ({ addNewCountable, countables }) => {
   const [isModalVisible, setModalVisible] = useState(false);
-
+  //Handles popup opening/closing
   const handleOpenPopup = () => {
     setModalVisible(true);
   };

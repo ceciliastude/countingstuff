@@ -1,3 +1,4 @@
+//Layout for the popup screen
 import { StyleSheet } from "react-native";
 
 export const Popupstyle = StyleSheet.create({

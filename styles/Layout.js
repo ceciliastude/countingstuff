@@ -1,3 +1,4 @@
+//General layout of the app
 import { StyleSheet } from "react-native";
 
 export const Layout = StyleSheet.create({

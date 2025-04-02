@@ -1,3 +1,4 @@
+//Stylesheet for when the page has no entries
 import { StyleSheet } from "react-native";
 
 export const EmptyPage = StyleSheet.create({

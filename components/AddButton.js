@@ -1,14 +1,11 @@
-import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
-
-import { CommonStyles } from "../styles/CommonStyles";
+import { TouchableOpacity, StyleSheet, Image } from "react-native";
 
 export const AddButton = ({ label, submit }) => (
-  <TouchableOpacity style={styles.button} onPress={submit}>
-    {typeof label === "string" ? (
-      <Text style={CommonStyles.textItem}>{label}</Text>
-    ) : (
-      <Image source={label} style={styles.image} />
-    )}
+  <TouchableOpacity
+    style={[styles.button, styles.buttonShadow]}
+    onPress={submit}
+  >
+    <Image source={label} style={styles.image} />
   </TouchableOpacity>
 );
 
@@ -20,6 +17,10 @@ const styles = StyleSheet.create({
     backgroundColor: "lightgreen",
     alignItems: "center",
     justifyContent: "center",
+  },
+  buttonShadow: {
+    shadowColor: "black",
+    elevation: 5,
   },
   image: {
     width: 30,

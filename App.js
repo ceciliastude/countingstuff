@@ -38,6 +38,7 @@ export default function App() {
     }
   }, [countables, isLoaded]);
 
+  //Function that changes the index/count of an entry. Math.max prevents the entry for going into negatives
   const changeCount = (amount, index) => {
     const newState = [...countables];
     newState[index].count = Math.max(0, newState[index].count + amount);
@@ -57,7 +58,7 @@ export default function App() {
     setEditingIndex(index);
     setEditedName(countables[index].name);
   };
-
+  //Function that saves the changes of an edited entry. Also checks if the edited entry is a duplicate/empty entry.
   const saveEdit = () => {
     const trimmedName = editedName.trim();
 
@@ -90,6 +91,7 @@ export default function App() {
           behavior={Platform.OS === "ios" ? "padding" : "undefined"}
           style={styles.container}
         >
+          {/* Implementation of the header. Is inside the Scrollview to prevent the keyboard messing up the layout.*/}
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={Layout.background}>
               <Text style={Layout.headerText}>All Counters</Text>
@@ -98,7 +100,7 @@ export default function App() {
                 submit={() => setIsModifyMode((prev) => !prev)}
               />
             </View>
-
+            {/* Implementation of the empty interface*/}
             {countables.length === 0 ? (
               <View style={EmptyPage.container}>
                 <Image
@@ -112,6 +114,7 @@ export default function App() {
               </View>
             ) : (
               countables.reduce((rows, _, index) => {
+                /* Implementation of entries.*/
                 if (index % 2 === 0) {
                   rows.push(
                     <View key={index} style={styles.rowContainer}>
@@ -128,7 +131,7 @@ export default function App() {
                         setEditedName={setEditedName}
                         isModifyMode={isModifyMode}
                       />
-                      {/* Sorts entries to the right side*/}
+                      {/* Sorts entries to the right side. This makes the layout have 2 entries next to each other.*/}
                       {countables[index + 1] && (
                         <CountableRow
                           countable={countables[index + 1]}
@@ -152,6 +155,7 @@ export default function App() {
             )}
           </ScrollView>
           <AddRow addNewCountable={addNewCountable} countables={countables} />
+          {/* Implementation of add button, which is implemented in addRow*/}
         </KeyboardAvoidingView>
         <StatusBar style="auto" />
       </SafeAreaView>

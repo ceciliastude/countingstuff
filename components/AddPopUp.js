@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+// Adds a popup for making new entries when you press the Add button.
 import { useState } from "react";
 import {
   View,
@@ -17,6 +17,9 @@ import { Popupstyle } from "../styles/Popupstyle";
 export const AddPopUp = ({ visible, onClose, addNewCountable, countables }) => {
   const [name, setName] = useState("");
 
+  //Checks for conditions like duplicate entries, empty entries and shows alerts that prevents the user from making those entries.
+  // Only if the entry is unique will it add the new countable entry.
+  //It will then close the popup, empty the input field and dismiss the keyboard
   const handleSubmit = () => {
     const trimmedName = name.trim();
 
@@ -24,7 +27,6 @@ export const AddPopUp = ({ visible, onClose, addNewCountable, countables }) => {
       Alert.alert("Invalid Input", "Row name cannot be empty.");
       return;
     }
-
     if (
       countables.some(
         (item) => item.name.toLowerCase() === trimmedName.toLowerCase()
@@ -40,6 +42,7 @@ export const AddPopUp = ({ visible, onClose, addNewCountable, countables }) => {
   };
 
   return (
+    //Modal is an animation component that supports the smooth transition to the popup
     <Modal visible={visible} animationType="fade" transparent>
       <View style={styles.overlay}>
         <View style={Popupstyle.container}>

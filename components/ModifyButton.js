@@ -1,12 +1,8 @@
-import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import { TouchableOpacity, StyleSheet, Image } from "react-native";
 
 export const ModifyButton = ({ label, submit }) => (
   <TouchableOpacity style={styles.button} onPress={submit}>
-    {typeof label === "string" ? (
-      <Text style={styles.textItem}>{label}</Text>
-    ) : (
-      <Image source={label} style={styles.image} />
-    )}
+    <Image source={label} style={styles.image} />
   </TouchableOpacity>
 );
 

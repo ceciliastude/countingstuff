@@ -2,16 +2,13 @@ import { StyleSheet } from "react-native";
 
 export const Popupstyle = StyleSheet.create({
   container: {
-    marginVertical: "70%",
-    marginHorizontal: 15,
     padding: 10,
-    flex: 1,
-    alignItems: "start",
     width: "92%",
     backgroundColor: "white",
     borderWidth: 2,
     borderRadius: 4,
     borderColor: "grey",
+    position: "absolute",
   },
   textTitle: {
     fontSize: 20,
@@ -20,6 +17,11 @@ export const Popupstyle = StyleSheet.create({
   },
   buttons: {
     padding: 10,
-    alignItems: "stretch",
+    width: "48%",
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 1,
+    backgroundColor: "lightblue",
   },
 });

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 import { AddButton } from "./AddButton";
 import { AddPopUp } from "./AddPopUp";
@@ -15,7 +15,7 @@ export const AddRow = ({ addNewCountable, countables }) => {
     setModalVisible(false);
   };
   return (
-    <View>
+    <View style={styles.addButtonContainer}>
       <AddButton
         label={require("../assets/add-icon.png")}
         submit={handleOpenPopup}
@@ -29,3 +29,13 @@ export const AddRow = ({ addNewCountable, countables }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  addButtonContainer: {
+    position: "absolute",
+    bottom: 20,
+    alignItems: "center",
+    marginHorizontal: 310,
+    width: "22%",
+  },
+});

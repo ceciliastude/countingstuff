@@ -3,17 +3,17 @@ import { StyleSheet } from "react-native";
 export const Layout = StyleSheet.create({
   background: {
     backgroundColor: "lightblue",
-    padding: 30,
+    height: 80,
     alignItems: "left",
-    justifyContent: "Center",
-    marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 8,
   },
   headerText: {
     fontSize: 24,
+    padding: 20,
     fontWeight: "bold",
-  },
-  settingsButton: {
-    width: 10,
-    height: 10,
+    marginBottom: -10,
   },
 });

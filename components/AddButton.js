@@ -15,12 +15,15 @@ export const AddButton = ({ label, submit }) => (
 const styles = StyleSheet.create({
   button: {
     borderRadius: 10,
-    margin: 20,
-    padding: 10,
+    width: 50,
+    height: 50,
     backgroundColor: "lightgreen",
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     width: 30,
     height: 30,
+    resizeMode: "contain",
   },
 });

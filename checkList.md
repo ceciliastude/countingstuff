@@ -10,5 +10,5 @@ List of improvements for CountingStuff.
 - [x] 6. Add an edit/delete button
 - [x] 7. Add an alternativ interface that shows when there's no objects in the list
 - [] 8) Sort the list from A-Z
-- [] 9) Improve the layout
+- [x] 9. Improve the layout
 - [] 10) \(Optional) Make a menu where you can add, select and delete a list

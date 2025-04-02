@@ -25,6 +25,7 @@ export const CountableRow = ({
   setEditedName,
   saveEdit,
   deleteCountable,
+  isModifyMode,
 }) => (
   <View style={styles.entryColumn}>
     <View style={styles.nameColumn}>
@@ -64,27 +65,29 @@ export const CountableRow = ({
           }}
         />
       </View>
-      {/* 
+
       <View style={styles.buttonColumn}>
-        {isEditing ? (
-          <ModifyButton
-            label="Save"
-            submit={() => {
-              saveEdit();
-            }}
-          />
-        ) : (
-          <ModifyButton label="Edit" submit={() => editCountable(index)} />
+        {isModifyMode && (
+          <>
+            {isEditing ? (
+              <ModifyButton
+                label="Save"
+                submit={() => {
+                  saveEdit();
+                }}
+              />
+            ) : (
+              <ModifyButton label="Edit" submit={() => editCountable(index)} />
+            )}
+            <ModifyButton
+              label="Delete"
+              submit={() => {
+                deleteConfirmation(countable.name, deleteCountable);
+              }}
+            />
+          </>
         )}
-        <ModifyButton
-          label="Delete"
-          submit={() => {
-            deleteConfirmation(countable.name, deleteCountable);
-          }}
-        />
-        
       </View>
-      */}
     </View>
   </View>
 );

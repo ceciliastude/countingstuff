@@ -13,6 +13,7 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
 import { AddRow } from "./components/AddRow";
 import { CountableRow } from "./components/CountableRow";
+import { ModifyButton } from "./components/ModifyButton";
 import { loadCountables, saveCountables } from "./storage/CountableStorage";
 import { EmptyPage } from "./styles/EmptyPage";
 import { Layout } from "./styles/Layout";
@@ -22,6 +23,7 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedName, setEditedName] = useState("");
+  const [isModifyMode, setIsModifyMode] = useState(false);
 
   useEffect(() => {
     loadCountables().then((result) => {
@@ -88,10 +90,15 @@ export default function App() {
           behavior={Platform.OS === "ios" ? "padding" : "undefined"}
           style={styles.container}
         >
-          <View style={Layout.background}>
-            <Text style={Layout.headerText}>All Counters</Text>
-          </View>
           <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <View style={Layout.background}>
+              <Text style={Layout.headerText}>All Counters</Text>
+              <ModifyButton
+                label={require("./assets/editIcon.png")}
+                submit={() => setIsModifyMode((prev) => !prev)}
+              />
+            </View>
+
             {countables.length === 0 ? (
               <View style={EmptyPage.container}>
                 <Image
@@ -119,8 +126,9 @@ export default function App() {
                         isEditing={editingIndex === index}
                         editedName={editedName}
                         setEditedName={setEditedName}
-                        style={{ flex: 1 }}
+                        isModifyMode={isModifyMode}
                       />
+                      {/* Sorts entries to the right side*/}
                       {countables[index + 1] && (
                         <CountableRow
                           countable={countables[index + 1]}
@@ -133,7 +141,7 @@ export default function App() {
                           isEditing={editingIndex === index + 1}
                           editedName={editedName}
                           setEditedName={setEditedName}
-                          style={{ flex: 1 }}
+                          isModifyMode={isModifyMode}
                         />
                       )}
                     </View>

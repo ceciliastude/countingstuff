@@ -1,18 +1,34 @@
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-
-import { ModifyStyles } from "../styles/ModifyStyles";
+import { TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 
 export const ModifyButton = ({ label, submit }) => (
   <TouchableOpacity style={styles.button} onPress={submit}>
-    <Text style={ModifyStyles.textItem}>{label}</Text>
+    {typeof label === "string" ? (
+      <Text style={styles.textItem}>{label}</Text>
+    ) : (
+      <Image source={label} style={styles.image} />
+    )}
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 5,
-    margin: 5,
-    backgroundColor: "lightgray",
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "black",
+    margin: 6,
+    backgroundColor: "lightblue",
     alignItems: "center",
+    justifyContent: "center",
+  },
+  textItem: {
+    fontSize: 15,
+  },
+  image: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 30,
+    height: 30,
   },
 });
